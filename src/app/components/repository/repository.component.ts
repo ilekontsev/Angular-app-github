@@ -1,18 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ResponseGitService } from '../../service/response-git.service';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-
-export interface Repo {
-  name: string;
-  owner: {
-    login: string;
-  };
-  watchers: number;
-  stargazers_count: number;
-  forks: number;
-  language: string;
-}
+import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { map, take, tap } from 'rxjs/operators';
+import { Repo } from '../../interfaces';
 
 @Component({
   selector: 'app-repository',
@@ -20,13 +10,30 @@ export interface Repo {
   styleUrls: ['./repository.component.scss'],
 })
 export class RepositoryComponent implements OnInit {
-  public repositories: Observable<any> = new Observable();
+  public repositories: Repo[] = [];
+
   constructor(private responseGitService: ResponseGitService) {}
 
   ngOnInit(): void {
-    this.repositories = this.responseGitService.repositories.pipe(
-      take(1),
-      map((res) => res)
-    );
+    this.responseGitService
+      .getRepository()
+      .pipe(
+        tap((res) => console.log(res)),
+        map((res) =>
+          res.map((item: Repo) => {
+            return { ...item, flag: false };
+          })
+        )
+      )
+      .subscribe((res) => (this.repositories = res));
+  }
+
+  hidden(repo: Repo): void {
+    this.repositories.forEach((item) => {
+      if (item.id !== repo.id) {
+        item.flag = false;
+      }
+    });
+    repo.flag = !repo.flag;
   }
 }
