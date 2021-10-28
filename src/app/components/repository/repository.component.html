@@ -1,11 +1,13 @@
 <div class="wrapper-repository">
-  <div class="block-repository" *ngFor="let repo of repositories | async">
+  <div class="repository-container" *ngFor="let repo of repositories" (click)="hidden(repo)">
+    <div class="block-repository">
+    <div class="block-image"><img class="image" [src]="repo.owner.avatar_url" alt="avatar"></div>
     <div class="flex-column flex-start" >
       <div class="container">
-        <div class="block-author-name">Author: {{repo.owner?.login}}</div>
-        <div class="block-repository-name">Repository: {{repo.name}}</div>
+        <div class="block-author-name">Author: <a [href]="repo.owner.html_url">{{repo.owner?.login}}</a></div>
+        <div class="block-repository-name">Repository: <a [href]="repo.html_url">{{repo.name}}</a></div>
       </div>
-      <button class="refresh-commit">rr</button>
+      <button class="refresh-commit">RC</button>
     </div>
 
     <div class="flex-column flex-end">
@@ -16,5 +18,19 @@
       </ul>
       <div class="block-language">Language: {{repo.language || 'None'}}</div>
     </div>
+    </div>
+    <ng-container *ngIf="repo.flag">
+      <ng-container *ngTemplateOutlet="ref" ></ng-container>
+    </ng-container>
   </div>
+
 </div>
+
+<ng-template #ref >
+  <div class="wrapper-commit">
+    <div class="block-commit">
+      <div class="commit-author">author commit: </div>
+        <div class="commit">commit: </div>
+    </div>
+  </div>
+</ng-template>

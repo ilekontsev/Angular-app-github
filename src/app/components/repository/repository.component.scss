@@ -3,15 +3,35 @@
   margin: auto;
   .block-repository {
     display: flex;
-    justify-content: space-between;
     width: 100%;
     height: 150px;
     margin-bottom: 10px;
     border-top: 1px solid #21262d;
-    &:last-child {
-      border-bottom: 1px solid #21262d;
-    }
   }
+}
+
+.repository-container{
+  &:last-child {
+    border-bottom: 1px solid #21262d;
+  }
+}
+
+.block-image{
+  width: 20%;
+  height: 100%;
+  .image{
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.refresh-commit{
+  margin-left: 5px;
+  background: #21262d;
+  border-radius: 50%;
+  height: 30px;
+  font-size: 14px;
+  box-shadow: 0 0 10px black;
 }
 
 .container{
@@ -23,6 +43,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  flex: 1 0;
 }
 
 .flex-start{
@@ -48,4 +69,17 @@
 .block-language{
   margin: 5px 0;
   padding: 10px;
+}
+
+.wrapper-commit{
+  min-height: 40px;
+  background: #dcdcdc;
+  margin-bottom: 10px;
+  box-shadow: 0 0 5px black inset;
+  padding: 10px;
+  .block-commit {
+    background: #000;
+    padding: 5px;
+    box-shadow: 0 0 5px black;
+  }
 }
