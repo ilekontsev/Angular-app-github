@@ -1,0 +1,20 @@
+<div class="wrapper-repository">
+  <div class="block-repository" *ngFor="let repo of repositories | async">
+    <div class="flex-column flex-start" >
+      <div class="container">
+        <div class="block-author-name">Author: {{repo.owner?.login}}</div>
+        <div class="block-repository-name">Repository: {{repo.name}}</div>
+      </div>
+      <button class="refresh-commit">rr</button>
+    </div>
+
+    <div class="flex-column flex-end">
+      <ul class="block-repository-details">
+        <li class="detail-item">Watch: {{repo.watchers || 0}}</li>
+        <li class="detail-item">Star: {{repo.stargazers_count || 0}}</li>
+        <li class="detail-item">Fork: {{repo.forks || 0}}</li>
+      </ul>
+      <div class="block-language">Language: {{repo.language || 'None'}}</div>
+    </div>
+  </div>
+</div>

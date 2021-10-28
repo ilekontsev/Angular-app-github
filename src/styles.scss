@@ -1,1 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
+
+@import "../node_modules/normalize.css/normalize.css";
+
+*{
+  outline: none;
+  text-decoration: none;
+  list-style: none;
+  color: #C9D1D9;
+}
+
+body {
+  background: #0d1117;
+}
