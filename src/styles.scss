@@ -1,11 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "../node_modules/normalize.css/normalize.css";
+@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
 
 *{
   outline: none;
   list-style: none;
   color: #C9D1D9;
+  font-family: 'Roboto', sans-serif;
 }
 
 body {

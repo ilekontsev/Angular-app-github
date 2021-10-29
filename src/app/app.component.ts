@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+
 import { ResponseGitService } from './service/response-git.service';
 
 @Component({
@@ -10,5 +11,10 @@ export class AppComponent implements OnInit {
   title = 'angular-app-github';
 
   constructor(private responseGitService: ResponseGitService) {}
-  ngOnInit() {}
+
+  ngOnInit() {
+    this.responseGitService.getRepository();
+    this.responseGitService.getUser();
+  }
+  
 }

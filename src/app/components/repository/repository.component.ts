@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { catchError, map } from 'rxjs/operators';
+
 import { ResponseGitService } from '../../service/response-git.service';
-import { map } from 'rxjs/operators';
+
 import { CommitRepo, Repo } from '../../interfaces';
 
 @Component({
@@ -9,19 +11,17 @@ import { CommitRepo, Repo } from '../../interfaces';
   styleUrls: ['./repository.component.scss'],
 })
 export class RepositoryComponent implements OnInit {
+  
   public repositories: Repo[] = [];
   public commits: CommitRepo[] = [];
+
   constructor(private responseGitService: ResponseGitService) {}
 
   ngOnInit(): void {
-    this.responseGitService
-      .getRepository()
-      .pipe(
-        map((res) => {
-          return { ...res, flag: false };
-        })
-      )
-      .subscribe((res) => this.repositories.push(res));
+    this.responseGitService.getObservableRepositories().subscribe(
+      (res) => (this.repositories = res),
+      (error) => error
+    );
   }
 
   getCommitRepo(repo: Repo): void {
@@ -59,5 +59,4 @@ export class RepositoryComponent implements OnInit {
       .getCommits(repo.owner.login, repo.name)
       .subscribe((res) => (this.commits = res));
   }
-  
 }
