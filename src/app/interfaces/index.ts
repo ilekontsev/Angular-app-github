@@ -1,3 +1,7 @@
+export interface DataRepo {
+  items: Repo[];
+}
+
 export interface Repo {
   name: string;
   owner: {
@@ -13,6 +17,7 @@ export interface Repo {
   flag?: boolean;
   id: number;
   url: string;
+  subscribers_count: string;
 }
 
 export interface CommitRepo {
@@ -24,4 +29,5 @@ export interface CommitRepo {
     message: string;
   };
   sha: string;
+  userName?: string;
 }
