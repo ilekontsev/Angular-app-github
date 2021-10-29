@@ -26,7 +26,19 @@
   }
 }
 
+.block-image{
+  width: 100%;
+  height: 100%;
+}
+
+.block-profile{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .avatar-user{
+  margin-left: 10px;
   background: #eee;
   border-radius: 50%;
   width: 50px;

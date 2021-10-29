@@ -1,4 +1,4 @@
-<div class="wrapper-repository">
+<div class="wrapper-repository" *ngIf="!!repositories.length">
   <div class="repository-container" *ngFor="let repo of repositories" (click)="handleHiddenCommit(repo)">
     <div class="block-repository">
     <div class="block-image"><img class="image" [src]="repo.owner.avatar_url" alt="avatar"></div>
@@ -27,12 +27,18 @@
 </div>
 
 <ng-template #ref >
-  <div class="wrapper-commit">
+  <div class="wrapper-commit" >
+    <ng-container *ngIf="commits.length; else noCommit">
     <div *ngFor="let commit of commits">
-      <div class="block-commit" >
+      <div class="block-commit"  >
         <div class="commit-author">author commit: {{commit.commit.author.name}} </div>
         <div class="commit">commit: {{commit.commit.message}}</div>
       </div>
     </div>
+    </ng-container>
   </div>
+</ng-template>
+
+<ng-template #noCommit>
+  <div class="block-commit">NO COMMITS</div>
 </ng-template>

@@ -2,9 +2,13 @@
 
 <div class="wrapper-header">
   <div class="header">
-    <div class="search-block">
-      <input class="search">
+    <div class="search-block"  >
+      <input #searchBox class="search" (keyup)="search(searchBox.value)">
     </div>
-    <div class="avatar-user"></div>
+
+    <div class="block-profile" *ngIf="userProfile">
+      <div>{{userProfile.login}}</div>
+      <img class="avatar-user" [src]="userProfile.avatar_url" alt="avatar">
+    </div>
   </div>
 </div>
